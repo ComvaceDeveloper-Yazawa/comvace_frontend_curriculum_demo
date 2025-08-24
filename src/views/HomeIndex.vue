@@ -1,17 +1,20 @@
 <script setup lang="ts">
+import AssignmentHTML1 from "@/components/AssignmentHTML1.vue";
 import { ref } from "vue";
-const selectedMenu = ref("main"); // ← 初期表示
+
+const isMenuDisplay = ref<boolean>(true);
+const selectedMenu = ref<string>("main");
+const displayPages = ref<string>("main");
+const selectedDevice = ref<string>("");
 
 const pagesChangeHandler = (pageIndex: string) => {
-  window.open(
-    `${import.meta.env.VITE_BASE_URL}html/assignment${pageIndex}`,
-    "_blank",
-  );
+  displayPages.value = pageIndex;
+  selectedMenu.value = "device";
 };
 </script>
 
 <template>
-  <div class="outer">
+  <div class="outer" v-if="isMenuDisplay === true">
     <nav v-if="selectedMenu === 'main'" class="scroll-pane">
       <h2>めにゅー</h2>
       <p @click="selectedMenu = 'html'">HTML</p>
@@ -32,7 +35,15 @@ const pagesChangeHandler = (pageIndex: string) => {
       <h2 @click="selectedMenu = 'main'">もどる</h2>
       <p>作成中</p>
     </nav>
+
+    <nav v-if="selectedMenu === 'device'" class="scroll-pane">
+      <h2 @click="selectedMenu = 'main'">もどる</h2>
+      <p @click="(selectedDevice = 'pc'), (isMenuDisplay = false)">PC</p>
+      <p @click="(selectedDevice = 'sp'), (isMenuDisplay = false)">SP</p>
+    </nav>
   </div>
+  <AssignmentHTML1 v-if="displayPages === '1' && selectedDevice === 'pc'" />
+  <!-- <AssignmentHTML1-1 v-if="displayPages === '1' && selectedDevice === 'pc'" /> -->
 </template>
 
 <style scoped lang="scss">
@@ -85,7 +96,6 @@ nav.scroll-pane {
     width: 100%;
     background: #000; /* スクロール時に透けないように */
     border-bottom: 2px solid #333;
-    z-index: 1;
   }
 
   p {
