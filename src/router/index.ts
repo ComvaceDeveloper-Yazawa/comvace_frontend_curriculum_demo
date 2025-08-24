@@ -9,15 +9,14 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: "/", name: "home", component: Home },
+    {
+      path: "/html/assignment1",
+      name: "html-assignment1",
+      component: () => import("@/views/html/AssignmentHTML1.vue"),
+    },
     // 404（:pathMatch は必ず最後）
     // { path: "/:pathMatch(.*)*", name: "not-found", component: NotFound },
   ],
-  // 画面遷移時のスクロール位置
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) return savedPosition;
-    if (to.hash) return { el: to.hash, behavior: "smooth" };
-    return { top: 0 };
-  },
 });
 
 export default router;
