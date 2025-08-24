@@ -3,7 +3,10 @@ import { ref } from "vue";
 const selectedMenu = ref("main"); // ← 初期表示
 
 const pagesChangeHandler = (pageIndex: string) => {
-  window.open(`/html/assignment${pageIndex}`, "_blank");
+  window.open(
+    `${import.meta.env.VITE_BASE_URL}/html/assignment${pageIndex}`,
+    "_blank",
+  );
 };
 </script>
 
