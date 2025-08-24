@@ -4,7 +4,7 @@ const selectedMenu = ref("main"); // ← 初期表示
 
 const pagesChangeHandler = (pageIndex: string) => {
   window.open(
-    `${import.meta.env.VITE_BASE_URL}/html/assignment${pageIndex}`,
+    `${import.meta.env.VITE_BASE_URL}html/assignment${pageIndex}`,
     "_blank",
   );
 };
