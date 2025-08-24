@@ -10,7 +10,7 @@ const router = createRouter({
   routes: [
     { path: "/", name: "home", component: Home },
     {
-      path: "/html/assignment1",
+      path: "/comvace_frontend_curriculum_demo/html/assignment1",
       name: "html-assignment1",
       component: () => import("@/views/html/AssignmentHTML1.vue"),
     },
