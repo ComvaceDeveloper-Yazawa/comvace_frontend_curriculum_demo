@@ -1,53 +1,61 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import NavigationModal from "./NavigationModal.vue";
+import menu1 from "@/assets/menu1.png";
+import menu2 from "@/assets/menu2.png";
+import menu3 from "@/assets/menu3.png";
+import menu4 from "@/assets/menu4.png";
+import menu5 from "@/assets/menu5.png";
+import menu6 from "@/assets/menu6.png";
+import menu7 from "@/assets/menu7.png";
+import menu8 from "@/assets/menu8.png";
 
 const menuList = ref([
   {
     id: 1,
-    path: `/src/assets/menu1.png`,
+    path: menu1,
     name: "アロマブレンド珈琲豆",
     price: "￥3,350",
   },
   {
     id: 2,
-    path: `/src/assets/menu2.png`,
+    path: menu2,
     name: "マイルドブレンド珈琲豆",
     price: "￥3,350",
   },
   {
     id: 3,
-    path: `/src/assets/menu3.png`,
+    path: menu3,
     name: "リッチブレンド珈琲豆",
     price: "￥3,350",
   },
   {
     id: 4,
-    path: `/src/assets/menu4.png`,
+    path: menu4,
     name: "アメリカン珈琲豆",
     price: "￥3,350",
   },
   {
     id: 5,
-    path: `/src/assets/menu5.png`,
+    path: menu5,
     name: "クリスタルマウンテン珈琲豆",
     price: "￥7,850",
   },
   {
     id: 6,
-    path: `/src/assets/menu6.png`,
+    path: menu6,
     name: "カリビアンクイーン珈琲豆",
     price: "￥5,850",
   },
   {
     id: 7,
-    path: `/src/assets/menu7.png`,
+    path: menu7,
     name: "マンデリン珈琲豆",
     price: "￥4,350",
   },
   {
     id: 8,
-    path: "/src/assets/menu8.png",
+    path: menu8,
     name: "ロブスタ珈琲豆",
     price: "￥3,350",
   },
