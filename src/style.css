@@ -92,6 +92,7 @@ button,
 textarea,
 select {
   font: inherit;
+  cursor: pointer;
 }
 
 /* 13. 行数属性のないtextareaの最小高さ */

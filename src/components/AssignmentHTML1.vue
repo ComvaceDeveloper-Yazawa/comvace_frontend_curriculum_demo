@@ -1,9 +1,61 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import NavigationModal from "./NavigationModal.vue";
+
+const menuList = ref([
+  {
+    id: 1,
+    path: `/src/assets/menu1.png`,
+    name: "アロマブレンド珈琲豆",
+    price: "￥3,350",
+  },
+  {
+    id: 2,
+    path: `/src/assets/menu2.png`,
+    name: "マイルドブレンド珈琲豆",
+    price: "￥3,350",
+  },
+  {
+    id: 3,
+    path: `/src/assets/menu3.png`,
+    name: "リッチブレンド珈琲豆",
+    price: "￥3,350",
+  },
+  {
+    id: 4,
+    path: `/src/assets/menu4.png`,
+    name: "アメリカン珈琲豆",
+    price: "￥3,350",
+  },
+  {
+    id: 5,
+    path: `/src/assets/menu5.png`,
+    name: "クリスタルマウンテン珈琲豆",
+    price: "￥7,850",
+  },
+  {
+    id: 6,
+    path: `/src/assets/menu6.png`,
+    name: "カリビアンクイーン珈琲豆",
+    price: "￥5,850",
+  },
+  {
+    id: 7,
+    path: `/src/assets/menu7.png`,
+    name: "マンデリン珈琲豆",
+    price: "￥4,350",
+  },
+  {
+    id: 8,
+    path: `/src/assets/menu8.png`,
+    name: "ロブスタ珈琲豆",
+    price: "￥3,350",
+  },
+]);
 </script>
 <template>
   <div class="main-view">
-    <p>コーヒーショップを作ってみよう</p>
+    <p>コーヒーショップを作ってみよう！</p>
     <img src="/src/assets/main-view.png" alt="" />
   </div>
   <div class="content">
@@ -22,6 +74,20 @@ import NavigationModal from "./NavigationModal.vue";
           </select>
         </div>
       </div>
+    </div>
+    <div class="menu-cards">
+      <div v-for="menu in menuList" :key="menu.id" class="card">
+        <img :src="menu.path" alt="" />
+        <div class="menu-info">
+          <p>{{ menu.name }}</p>
+          <p>{{ menu.price }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="cart-info">
+      <p>このアカウントでカートに追加した商品の一覧を見ることができます</p>
+      <p>購入手続きもこちらから行うことができます</p>
+      <button>カート一覧を見る</button>
     </div>
   </div>
   <NavigationModal />
@@ -57,8 +123,11 @@ body {
 
 .content {
   background-color: #fff9f4;
+  width: 100%;
   padding: 80px 90px;
-  max-width: 1260px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 
 .searchbar-area {
@@ -99,6 +168,55 @@ body {
         background: url("/src/assets/selector.png") no-repeat right 10px center
           #fff;
       }
+    }
+  }
+}
+
+.menu-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  grid-auto-rows: 390px;
+  .card {
+    padding: 0 30px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    box-shadow: 6px 10px 10px 0px rgb(0, 0, 0, 0.05);
+    .menu-info {
+      font-size: 18px;
+      font-weight: 400px;
+    }
+  }
+}
+
+.cart-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.8;
+  background-color: #33362f;
+  color: #fff;
+  gap: 20px;
+  padding: 50px;
+  button {
+    border-radius: 50px;
+    padding: 16px 68px;
+    background-color: #fff;
+    color: #33362f;
+    cursor: pointer;
+    border: #fff 1px solid;
+
+    &:hover {
+      background-color: #000;
+      color: #fff;
+      border: #000 1px solid;
     }
   }
 }

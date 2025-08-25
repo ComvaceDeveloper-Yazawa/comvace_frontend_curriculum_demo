@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AssignmentHTML1 from "@/components/AssignmentHTML1.vue";
+import AssignmentHTML2 from "@/components/AssignmentHTML2.vue";
 import { ref } from "vue";
 
 const isMenuDisplay = ref<boolean>(true);
@@ -43,7 +44,7 @@ const pagesChangeHandler = (pageIndex: string) => {
     </nav>
   </div>
   <AssignmentHTML1 v-if="displayPages === '1' && selectedDevice === 'pc'" />
-  <!-- <AssignmentHTML1-1 v-if="displayPages === '1' && selectedDevice === 'pc'" /> -->
+  <AssignmentHTML2 v-if="displayPages === '1' && selectedDevice === 'sp'" />
 </template>
 
 <style scoped lang="scss">
@@ -53,7 +54,7 @@ const pagesChangeHandler = (pageIndex: string) => {
   cursor: url("/cursor-sword-32.png") 0 0, auto !important;
   font-family: "DotGothic16", sans-serif;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   /* 背景はそのまま */
   background: url("/firstview.png") center/cover no-repeat;
   display: grid;
