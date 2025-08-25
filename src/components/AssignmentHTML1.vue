@@ -47,7 +47,7 @@ const menuList = ref([
   },
   {
     id: 8,
-    path: `/src/assets/menu8.png`,
+    path: "/src/assets/menu8.png",
     name: "ロブスタ珈琲豆",
     price: "￥3,350",
   },
@@ -77,7 +77,7 @@ const menuList = ref([
     </div>
     <div class="menu-cards">
       <div v-for="menu in menuList" :key="menu.id" class="card">
-        <img :src="menu.path" alt="" />
+        <img src="/src/assets/menu8.png" alt="" />
         <div class="menu-info">
           <p>{{ menu.name }}</p>
           <p>{{ menu.price }}</p>
