@@ -32,7 +32,6 @@ const isDisplay = ref<boolean>(true);
   top: 50%;
   left: 50%;
   width: 90vw;
-  height: 300px;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.9);
   color: black;
