@@ -77,7 +77,7 @@ const menuList = ref([
     </div>
     <div class="menu-cards">
       <div v-for="menu in menuList" :key="menu.id" class="card">
-        <img src="/src/assets/menu8.png" alt="" />
+        <img :src="menu.path" alt="" />
         <div class="menu-info">
           <p>{{ menu.name }}</p>
           <p>{{ menu.price }}</p>
