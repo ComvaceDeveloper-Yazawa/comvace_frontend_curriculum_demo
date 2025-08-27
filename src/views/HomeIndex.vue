@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import NavigationModal from "@/components/NavigationModal.vue";
 import AssignmentHTML1 from "@/components/AssignmentHTML1.vue";
 import AssignmentHTML2 from "@/components/AssignmentHTML2.vue";
+import AssignmentHTML3 from "@/components/AssignmentHTML3.vue";
 import { ref } from "vue";
 
 const isMenuDisplay = ref<boolean>(true);
@@ -8,9 +10,13 @@ const selectedMenu = ref<string>("main");
 const displayPages = ref<string>("main");
 const selectedDevice = ref<string>("");
 
-const pagesChangeHandler = (pageIndex: string) => {
+const selectedAssignment = (pageIndex: string) => {
   displayPages.value = pageIndex;
   selectedMenu.value = "device";
+};
+const selectedDeviceHandler = (device: string) => {
+  selectedDevice.value = device;
+  isMenuDisplay.value = false;
 };
 </script>
 
@@ -24,12 +30,12 @@ const pagesChangeHandler = (pageIndex: string) => {
 
     <nav v-if="selectedMenu === 'html'" class="scroll-pane">
       <h2 @click="selectedMenu = 'main'">もどる</h2>
-      <p @click="pagesChangeHandler('1')">課題1</p>
-      <p @click="pagesChangeHandler('2')">課題2</p>
-      <p @click="pagesChangeHandler('3')">課題3</p>
-      <p @click="pagesChangeHandler('4')">課題4</p>
-      <p @click="pagesChangeHandler('5')">課題5</p>
-      <p @click="pagesChangeHandler('6')">課題6</p>
+      <p @click="selectedAssignment('1')">課題1</p>
+      <p @click="selectedAssignment('2')">課題2</p>
+      <p @click="selectedAssignment('3')">課題3</p>
+      <p @click="selectedAssignment('4')">課題4</p>
+      <p @click="selectedAssignment('5')">課題5</p>
+      <p @click="selectedAssignment('6')">課題6</p>
     </nav>
 
     <nav v-if="selectedMenu === 'vue'" class="scroll-pane">
@@ -39,12 +45,14 @@ const pagesChangeHandler = (pageIndex: string) => {
 
     <nav v-if="selectedMenu === 'device'" class="scroll-pane">
       <h2 @click="selectedMenu = 'main'">もどる</h2>
-      <p @click="(selectedDevice = 'pc'), (isMenuDisplay = false)">PC</p>
-      <p @click="(selectedDevice = 'sp'), (isMenuDisplay = false)">SP</p>
+      <p @click="selectedDeviceHandler('pc')">PC</p>
+      <p @click="selectedDeviceHandler('sp')">SP</p>
     </nav>
   </div>
+  <NavigationModal v-if="isMenuDisplay === false" />
   <AssignmentHTML1 v-if="displayPages === '1' && selectedDevice === 'pc'" />
   <AssignmentHTML2 v-if="displayPages === '1' && selectedDevice === 'sp'" />
+  <AssignmentHTML3 v-if="displayPages === '2' && selectedDevice === 'pc'" />
 </template>
 
 <style scoped lang="scss">
@@ -55,10 +63,9 @@ const pagesChangeHandler = (pageIndex: string) => {
   font-family: "DotGothic16", sans-serif;
   width: 100vw;
   height: 100svh;
-  /* 背景はそのまま */
   background: url("/firstview.png") center/cover no-repeat;
   display: grid;
-  place-items: center; /* 中央配置 */
+  place-items: center;
 }
 
 /* スクロールさせるパネル */
@@ -73,8 +80,6 @@ nav.scroll-pane {
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-
-  /* ★ ここがポイント：高さ制限＋内部スクロール */
   max-height: min(70vh, 640px);
   overflow: auto;
   -webkit-overflow-scrolling: touch;

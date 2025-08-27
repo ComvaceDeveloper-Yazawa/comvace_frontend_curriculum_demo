@@ -23,9 +23,10 @@ const isDisplay = ref<boolean>(true);
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  background: url("/public/modal-bk.png");
+  height: 100svh;
+  background: url("/modal-bk.png") !important;
   font-family: "DotGothic16", sans-serif;
+  z-index: 9999999999;
 }
 .inner {
   position: absolute;
