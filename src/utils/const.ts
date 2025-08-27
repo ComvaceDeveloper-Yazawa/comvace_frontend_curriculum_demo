@@ -11,7 +11,7 @@ interface ProductCartListHeaderModel {
 interface ProductCartListModel {
   id: number;
   name: string;
-  price: number;
+  price: string;
   quantity: number;
   image: string;
   alt: string;
@@ -36,7 +36,7 @@ export const productCartList: ProductCartListModel[] = [
   {
     id: 1,
     name: "アロマブレンド珈琲豆",
-    price: 3350,
+    price: "¥3350",
     quantity: 1,
     image: menu1,
     alt: "アロマブレンド珈琲豆の写真",
@@ -44,7 +44,7 @@ export const productCartList: ProductCartListModel[] = [
   {
     id: 2,
     name: "マイルドブレンド珈琲豆",
-    price: 3350,
+    price: "¥3350",
     quantity: 1,
     image: menu2,
     alt: "マイルドブレンド珈琲豆の写真",
@@ -52,7 +52,7 @@ export const productCartList: ProductCartListModel[] = [
   {
     id: 3,
     name: "カリビアンクイーン珈琲豆",
-    price: 5850,
+    price: "¥5850",
     quantity: 1,
     image: menu6,
     alt: "カリビアンクイーン珈琲豆の写真",
@@ -60,7 +60,7 @@ export const productCartList: ProductCartListModel[] = [
   {
     id: 4,
     name: "クリスタルマウンテン珈琲豆",
-    price: 7850,
+    price: "¥7850",
     quantity: 1,
     image: menu5,
     alt: "クリスタルマウンテン珈琲豆の写真",
