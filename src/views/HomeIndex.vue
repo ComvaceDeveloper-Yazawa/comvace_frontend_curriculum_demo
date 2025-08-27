@@ -4,9 +4,10 @@ import AssignmentHTML1 from "@/components/AssignmentHTML1.vue";
 import AssignmentHTML2 from "@/components/AssignmentHTML2.vue";
 import AssignmentHTML3 from "@/components/AssignmentHTML3.vue";
 import AssignmentHTML4 from "@/components/AssignmentHTML4.vue";
-import { ref } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const isMenuDisplay = ref<boolean>(true);
+const isOpeningDisplay = ref<boolean>(true);
 const selectedMenu = ref<string>("main");
 const displayPages = ref<string>("main");
 const selectedDevice = ref<string>("");
@@ -19,9 +20,49 @@ const selectedDeviceHandler = (device: string) => {
   selectedDevice.value = device;
   isMenuDisplay.value = false;
 };
+
+const animationEl = ref<HTMLElement | null>(null);
+const textEl = ref<HTMLElement | null>(null);
+
+const text = "Comvace Quest";
+let index = 0;
+let timer: number | undefined;
+
+function typeWriter() {
+  if (!textEl.value || !animationEl.value) return;
+
+  if (index < text.length) {
+    textEl.value.textContent += text.charAt(index++);
+    timer = window.setTimeout(typeWriter, 120);
+  } else {
+    animationEl.value.classList.add("fade-out");
+    textEl.value.classList.add("fade-out");
+  }
+}
+
+function onAnimEnd(_e: AnimationEvent) {
+  isOpeningDisplay.value = false;
+}
+
+onMounted(() => {
+  typeWriter();
+});
+
+onBeforeUnmount(() => {
+  if (timer) clearTimeout(timer);
+});
 </script>
 
 <template>
+  <div v-if="isOpeningDisplay" ref="animationEl" class="animation-outer">
+    <span
+      id="text"
+      ref="textEl"
+      class="animation-text"
+      @animationend="onAnimEnd"
+    ></span>
+  </div>
+
   <div
     :class="isMenuDisplay === true ? 'index-outer' : 'none'"
     v-if="isMenuDisplay === true"
@@ -29,17 +70,17 @@ const selectedDeviceHandler = (device: string) => {
     <nav v-if="selectedMenu === 'main'" class="scroll-pane">
       <h2>めにゅー</h2>
       <p @click="selectedMenu = 'html'">HTML</p>
-      <p @click="selectedMenu = 'vue'">Vue</p>
+      <!-- <p @click="selectedMenu = 'vue'">Vue</p> -->
     </nav>
 
     <nav v-if="selectedMenu === 'html'" class="scroll-pane">
       <h2 @click="selectedMenu = 'main'">もどる</h2>
       <p @click="selectedAssignment('1')">課題1</p>
       <p @click="selectedAssignment('2')">課題2</p>
-      <p @click="selectedAssignment('3')">課題3</p>
+      <!-- <p @click="selectedAssignment('3')">課題3</p>
       <p @click="selectedAssignment('4')">課題4</p>
       <p @click="selectedAssignment('5')">課題5</p>
-      <p @click="selectedAssignment('6')">課題6</p>
+      <p @click="selectedAssignment('6')">課題6</p> -->
     </nav>
 
     <nav v-if="selectedMenu === 'vue'" class="scroll-pane">
@@ -62,6 +103,49 @@ const selectedDeviceHandler = (device: string) => {
 
 <style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
+.animation-outer {
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100svh;
+  background: url("/logo.png") center/cover no-repeat #000;
+  background-position: right bottom;
+  background-size: 100px;
+  position: fixed;
+  z-index: 99999999;
+  .animation-text {
+    font-family: "DotGothic16", sans-serif;
+    font-size: clamp(35px, 6vw, 100px);
+    text-align: center;
+    line-height: 0.95em;
+    font-weight: bold;
+    color: transparent;
+    background: repeating-linear-gradient(
+      0deg,
+      #b67b03 0.1em,
+      #daaf08 0.2em,
+      #fee9a0 0.3em,
+      #daaf08 0.4em,
+      #b67b03 0.5em
+    );
+
+    -webkit-background-clip: text;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.6s ease forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
 
 .index-outer {
   cursor: url("/cursor-sword-32.png") 0 0, auto !important;
