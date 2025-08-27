@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import PageTitle from "@/components/parts/PageTitle.vue";
 import TableViewSP from "@/components/parts/TableViewSP.vue";
-import PageBottomNav from "@/components/parts/PageBottomNav.vue";
+// import PageBottomNav from "@/components/parts/PageBottomNav.vue";
 </script>
 <template>
   <div class="outer">

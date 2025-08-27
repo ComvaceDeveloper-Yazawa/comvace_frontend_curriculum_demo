@@ -40,10 +40,11 @@ table {
 }
 
 th {
-  height: 70px;
+  height: 50px;
+  font-weight: 400;
   background-color: #33362f;
   color: #ffffff;
-  font-size: 22px;
+  font-size: 14px;
   letter-spacing: 0.5em;
 }
 
@@ -56,7 +57,7 @@ th:not:first-child {
 }
 
 td {
-  height: 120px;
+  height: 80px;
   padding: 0 10px;
   font-size: 14px;
   font-weight: 400;
@@ -75,6 +76,7 @@ td {
     .product-text-area {
       display: flex;
       flex-direction: column;
+      padding-top: 5px;
     }
 
     .product-image {
@@ -84,8 +86,9 @@ td {
     }
 
     .trush-icon {
-      width: 40px;
-      height: 40px;
+      width: 22px;
+      height: 22px;
+      margin-left: auto;
       cursor: pointer;
     }
   }
