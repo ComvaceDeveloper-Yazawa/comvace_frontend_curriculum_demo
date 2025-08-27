@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import NavigationModal from "./NavigationModal.vue";
-
 import menu1 from "@/assets/menu1.png";
 import menu2 from "@/assets/menu2.png";
 import menu3 from "@/assets/menu3.png";
@@ -106,8 +104,6 @@ const menuList = ref([
       </div>
     </div>
   </div>
-
-  <NavigationModal />
 </template>
 <style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap");

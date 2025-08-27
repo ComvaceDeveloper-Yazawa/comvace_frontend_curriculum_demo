@@ -3,6 +3,7 @@ import NavigationModal from "@/components/NavigationModal.vue";
 import AssignmentHTML1 from "@/components/AssignmentHTML1.vue";
 import AssignmentHTML2 from "@/components/AssignmentHTML2.vue";
 import AssignmentHTML3 from "@/components/AssignmentHTML3.vue";
+import AssignmentHTML4 from "@/components/AssignmentHTML4.vue";
 import { ref } from "vue";
 
 const isMenuDisplay = ref<boolean>(true);
@@ -21,7 +22,10 @@ const selectedDeviceHandler = (device: string) => {
 </script>
 
 <template>
-  <div class="outer" v-if="isMenuDisplay === true">
+  <div
+    :class="isMenuDisplay === true ? 'index-outer' : 'none'"
+    v-if="isMenuDisplay === true"
+  >
     <nav v-if="selectedMenu === 'main'" class="scroll-pane">
       <h2>めにゅー</h2>
       <p @click="selectedMenu = 'html'">HTML</p>
@@ -53,12 +57,13 @@ const selectedDeviceHandler = (device: string) => {
   <AssignmentHTML1 v-if="displayPages === '1' && selectedDevice === 'pc'" />
   <AssignmentHTML2 v-if="displayPages === '1' && selectedDevice === 'sp'" />
   <AssignmentHTML3 v-if="displayPages === '2' && selectedDevice === 'pc'" />
+  <AssignmentHTML4 v-if="displayPages === '2' && selectedDevice === 'sp'" />
 </template>
 
 <style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
 
-.outer {
+.index-outer {
   cursor: url("/cursor-sword-32.png") 0 0, auto !important;
   font-family: "DotGothic16", sans-serif;
   width: 100vw;
@@ -66,6 +71,10 @@ const selectedDeviceHandler = (device: string) => {
   background: url("/firstview.png") center/cover no-repeat;
   display: grid;
   place-items: center;
+}
+
+.none {
+  display: none;
 }
 
 /* スクロールさせるパネル */
