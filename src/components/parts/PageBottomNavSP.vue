@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CommonButton from "./CommonButton.vue";
 const props = defineProps<{
   text: string;
   isSingleButton: boolean;
@@ -15,8 +16,8 @@ const props = defineProps<{
         <button>{{ props.buttonText }}</button>
       </div>
       <div class="double-button" v-else>
-        <button class="prev">{{ props.buttonPrevText }}</button>
-        <button class="next">{{ props.buttonNextText }}</button>
+        <CommonButton text="戻る" :mode="'sp-prev'" />
+        <CommonButton text="購入する" :mode="'sp-next'" />
       </div>
     </div>
   </div>
@@ -46,33 +47,6 @@ const props = defineProps<{
     display: flex;
     flex-direction: column;
     gap: 27px;
-
-    .prev {
-      color: #fff;
-      border: 1px solid #fff;
-      background-color: #33362f;
-
-      &:hover {
-        background-color: #000;
-        border: 1px solid #000;
-      }
-    }
-    .next {
-      color: #33362f;
-      border: 1px solid #fff;
-      background-color: #fff;
-
-      &:hover {
-        color: #fff;
-        background-color: #000;
-        border: 1px solid #000;
-      }
-    }
-  }
-  button {
-    border-radius: 50px;
-    padding: 10px 0;
-    width: 200px;
   }
 }
 </style>
