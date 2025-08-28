@@ -100,7 +100,13 @@ onBeforeUnmount(() => {
   <AssignmentHTML2 v-if="displayPages === '1' && selectedDevice === 'sp'" />
   <AssignmentHTML3 v-if="displayPages === '2' && selectedDevice === 'pc'" />
   <AssignmentHTML4 v-if="displayPages === '2' && selectedDevice === 'sp'" />
-  <AssignmentHTML5 v-if="displayPages === '3' && selectedDevice === 'pc'" />
+  <AssignmentHTML5
+    v-if="
+      (displayPages === '3' && selectedDevice === 'pc') ||
+      (displayPages === '3' && selectedDevice === 'sp')
+    "
+    :device="selectedDevice"
+  />
 </template>
 
 <style scoped lang="scss">

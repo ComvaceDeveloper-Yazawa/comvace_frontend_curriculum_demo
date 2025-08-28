@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import ProductDetailModal from "@/components/modal/ProductDetailModal.vue";
+import ProductDetailModalSP from "@/components/modal/ProductDetailModalSP.vue";
 
 const openProductDetailModal = ref<boolean>(false);
+const openProductDetailModalSP = ref<boolean>(false);
 
 /**
  * Props:
@@ -27,13 +29,27 @@ defineProps({
     type: Number,
     default: 16,
   },
+  device: {
+    type: String,
+    required: true,
+  },
 });
 </script>
 <template>
-  <main class="wrap" v-if="!openProductDetailModal">
+  <main
+    class="wrap"
+    v-if="!openProductDetailModal && !openProductDetailModalSP"
+  >
     <section class="panel">
       <h1>課題3・案内</h1>
-      <p class="hint" @click="openProductDetailModal = true">
+      <p
+        class="hint"
+        @click="
+          device === 'pc'
+            ? (openProductDetailModal = true)
+            : (openProductDetailModalSP = true)
+        "
+      >
         成果物1：商品詳細モーダルを表示
       </p>
       <p class="hint">成果物2：カート追加完了モーダルを表示</p>
@@ -82,6 +98,10 @@ defineProps({
   <ProductDetailModal
     v-if="openProductDetailModal"
     v-model="openProductDetailModal"
+  />
+  <ProductDetailModalSP
+    v-if="openProductDetailModalSP"
+    v-model="openProductDetailModalSP"
   />
 </template>
 

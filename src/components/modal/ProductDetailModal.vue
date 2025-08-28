@@ -76,6 +76,7 @@ const openProductDetailModal = defineModel();
     .product-image {
       width: 476px;
       height: 461px;
+      object-fit: cover;
     }
   }
 }
