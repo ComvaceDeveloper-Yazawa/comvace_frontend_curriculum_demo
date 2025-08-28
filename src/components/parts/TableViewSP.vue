@@ -66,6 +66,7 @@ td {
     display: flex;
     align-items: center;
     gap: 10px;
+    width: 100%;
 
     .product-area {
       display: flex;
@@ -77,10 +78,11 @@ td {
       display: flex;
       flex-direction: column;
       padding-top: 5px;
+      width: 100%;
     }
 
     .product-image {
-      width: 60px;
+      min-width: 60px;
       height: 60px;
       object-fit: cover;
     }
