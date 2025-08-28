@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import NavigationModal from "@/components/NavigationModal.vue";
+import NavigationModal from "@/components/modal/NavigationModal.vue";
 import AssignmentHTML1 from "@/components/AssignmentHTML1.vue";
 import AssignmentHTML2 from "@/components/AssignmentHTML2.vue";
 import AssignmentHTML3 from "@/components/AssignmentHTML3.vue";
 import AssignmentHTML4 from "@/components/AssignmentHTML4.vue";
+import AssignmentHTML5 from "@/components/AssignmentHTML5.vue";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const isMenuDisplay = ref<boolean>(true);
@@ -77,10 +78,10 @@ onBeforeUnmount(() => {
       <h2 @click="selectedMenu = 'main'">もどる</h2>
       <p @click="selectedAssignment('1')">課題1</p>
       <p @click="selectedAssignment('2')">課題2</p>
-      <!-- <p @click="selectedAssignment('3')">課題3</p>
+      <p @click="selectedAssignment('3')">課題3</p>
       <p @click="selectedAssignment('4')">課題4</p>
       <p @click="selectedAssignment('5')">課題5</p>
-      <p @click="selectedAssignment('6')">課題6</p> -->
+      <p @click="selectedAssignment('6')">課題6</p>
     </nav>
 
     <nav v-if="selectedMenu === 'vue'" class="scroll-pane">
@@ -99,6 +100,7 @@ onBeforeUnmount(() => {
   <AssignmentHTML2 v-if="displayPages === '1' && selectedDevice === 'sp'" />
   <AssignmentHTML3 v-if="displayPages === '2' && selectedDevice === 'pc'" />
   <AssignmentHTML4 v-if="displayPages === '2' && selectedDevice === 'sp'" />
+  <AssignmentHTML5 v-if="displayPages === '3' && selectedDevice === 'pc'" />
 </template>
 
 <style scoped lang="scss">
