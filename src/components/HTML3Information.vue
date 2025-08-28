@@ -2,9 +2,12 @@
 import { ref } from "vue";
 import ProductDetailModal from "@/components/modal/ProductDetailModal.vue";
 import ProductDetailModalSP from "@/components/modal/ProductDetailModalSP.vue";
+import CommonModal from "@/components/modal/CommonModal.vue";
 
 const openProductDetailModal = ref<boolean>(false);
 const openProductDetailModalSP = ref<boolean>(false);
+const openCommonModal = ref<boolean>(false);
+const selectedDisplayModal = ref<string>("");
 
 /**
  * Props:
@@ -38,7 +41,9 @@ defineProps({
 <template>
   <main
     class="wrap"
-    v-if="!openProductDetailModal && !openProductDetailModalSP"
+    v-if="
+      !openProductDetailModal && !openProductDetailModalSP && !openCommonModal
+    "
   >
     <section class="panel">
       <h1>課題3・案内</h1>
@@ -52,9 +57,33 @@ defineProps({
       >
         成果物1：商品詳細モーダルを表示
       </p>
-      <p class="hint">成果物2：カート追加完了モーダルを表示</p>
-      <p class="hint">成果物3：注文完了モーダルを表示</p>
-      <p class="hint">成果物4：送信完了モーダルを表示</p>
+      <p
+        class="hint"
+        @click="
+          openCommonModal = true;
+          selectedDisplayModal = 'cart';
+        "
+      >
+        成果物2：カート追加完了モーダルを表示
+      </p>
+      <p
+        class="hint"
+        @click="
+          openCommonModal = true;
+          selectedDisplayModal = 'order';
+        "
+      >
+        成果物3：注文完了モーダルを表示
+      </p>
+      <p
+        class="hint"
+        @click="
+          openCommonModal = true;
+          selectedDisplayModal = 'send';
+        "
+      >
+        成果物4：送信完了モーダルを表示
+      </p>
     </section>
 
     <aside
@@ -102,6 +131,12 @@ defineProps({
   <ProductDetailModalSP
     v-if="openProductDetailModalSP"
     v-model="openProductDetailModalSP"
+  />
+  <CommonModal
+    v-if="openCommonModal"
+    v-model="openCommonModal"
+    :selectedDisplayModal="selectedDisplayModal"
+    :device="device"
   />
 </template>
 
