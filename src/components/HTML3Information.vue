@@ -112,7 +112,7 @@ defineProps({
       <div class="char-wrap">
         <img
           class="char"
-          src="/chara.png"
+          :src="imageSrc"
           alt="レトロRPG風の魔法使いキャラクター"
           decoding="async"
           loading="eager"
