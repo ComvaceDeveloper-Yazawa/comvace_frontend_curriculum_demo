@@ -3,41 +3,25 @@ import { ref } from "vue";
 import ProductDetailModal from "@/components/modal/ProductDetailModal.vue";
 import ProductDetailModalSP from "@/components/modal/ProductDetailModalSP.vue";
 import CommonModal from "@/components/modal/CommonModal.vue";
+import closeIcon from "@/assets/close-info.png";
+import questionIcon from "@/assets/open-info.png";
+import imageSrc from "/chara.png";
 
 const openProductDetailModal = ref<boolean>(false);
 const openProductDetailModalSP = ref<boolean>(false);
 const openCommonModal = ref<boolean>(false);
 const selectedDisplayModal = ref<string>("");
 
-/**
- * Props:
- * - imageSrc: 魔法使い画像のURL（例：/images/mage.png）
- * - scale: ガイド全体の拡大率（0.8〜1.2 など）
- * - offsetRight / offsetBottom: 画面端からの余白（px）
- */
+const showGuide = ref<boolean>(true);
+
 defineProps({
-  imageSrc: {
-    type: String,
-    default: "/chara.png",
-  },
-  scale: {
-    type: Number,
-    default: 1,
-  },
-  offsetRight: {
-    type: Number,
-    default: 16,
-  },
-  offsetBottom: {
-    type: Number,
-    default: 16,
-  },
-  device: {
-    type: String,
-    required: true,
-  },
+  scale: { type: Number, default: 1 },
+  offsetRight: { type: Number, default: 16 },
+  offsetBottom: { type: Number, default: 16 },
+  device: { type: String, required: true },
 });
 </script>
+
 <template>
   <main
     class="wrap"
@@ -94,12 +78,21 @@ defineProps({
         bottom: offsetBottom + 'px',
       }"
     >
+      <!-- 吹き出し（右上にレトロ閉じるボタン） -->
       <div
+        v-if="showGuide"
         class="bubble"
         role="dialog"
         aria-live="polite"
         aria-label="課題3の案内"
       >
+        <button
+          class="icon-btn icon-close"
+          aria-label="案内を閉じる"
+          @click="showGuide = false"
+        >
+          <img :src="closeIcon" alt="" class="icon-img icon-img--close" />
+        </button>
         <ul>
           <li>
             課題3は成果物が<strong>4つ</strong>あるので注意をしてください。
@@ -108,22 +101,35 @@ defineProps({
             それぞれ<strong>別々のHTMLファイル</strong>を作成してまとめてレビュー依頼に出してください。
           </li>
           <li>
-            デモの展示は「<strong>×</strong>」ボタンと「<strong>買い物を続ける</strong>」ボタンを
-            クリック or タップするとモーダルが閉じられますが、
-            課題では<strong>開閉機能は実装対象外</strong>です。
+            デモの展示は「<strong>×</strong>」ボタンと「<strong>買い物を続ける</strong>」ボタンをクリック
+            or
+            タップするとモーダルが閉じられますが、課題では<strong>開閉機能は実装対象外</strong>です。
           </li>
         </ul>
       </div>
 
-      <img
-        class="char"
-        :src="imageSrc"
-        alt="レトロRPG風の魔法使いキャラクター"
-        decoding="async"
-        loading="eager"
-      />
+      <!-- キャラ＋（非表示時のみ）クエスチョン再表示ボタン -->
+      <div class="char-wrap">
+        <img
+          class="char"
+          src="/chara.png"
+          alt="レトロRPG風の魔法使いキャラクター"
+          decoding="async"
+          loading="eager"
+        />
+        <button
+          v-if="!showGuide"
+          class="icon-btn icon-question"
+          aria-label="案内を再表示する"
+          @click="showGuide = true"
+          title="案内を再表示"
+        >
+          <img :src="questionIcon" alt="" class="icon-img icon-img--question" />
+        </button>
+      </div>
     </aside>
   </main>
+
   <ProductDetailModal
     v-if="openProductDetailModal"
     v-model="openProductDetailModal"
@@ -141,7 +147,6 @@ defineProps({
 </template>
 
 <style scoped>
-/* ------- 全体の雰囲気（軽いレトロ調） ------- */
 :root {
   --bg: #0f1220;
   --panel: #ffffff;
@@ -150,7 +155,6 @@ defineProps({
 }
 
 .wrap {
-  min-height: 100%;
   min-height: 100dvh;
   place-items: center;
   padding: 6rem 1rem 10rem;
@@ -180,17 +184,14 @@ h1 {
   letter-spacing: 0.06em;
   text-shadow: 0 0 8px rgba(43, 210, 255, 0.35);
 }
-
 .panel p {
   line-height: 1.9;
 }
-
 .hint {
   color: #b6e6ff;
   cursor: pointer;
 }
 
-/* ------- 右下の案内（吹き出し＋キャラ） ------- */
 .guide {
   position: fixed;
   display: flex;
@@ -206,21 +207,65 @@ h1 {
   color: var(--ink);
   background: var(--panel);
   border: 4px solid #111;
-  padding: 14px 16px;
+  padding: 30px 30px 30px 10px;
   border-radius: 10px;
   box-shadow: 0 0 0 4px #fff inset, 0 8px 0 #111;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
   position: relative;
 }
 
-.bubble ul {
-  margin: 0;
-  padding-left: 1.2em;
+/* ▼ レトロ調ボタンの枠は維持。中身のアイコンは <img> で表示 */
+.icon-btn {
+  --size: 40px;
+  width: var(--size);
+  height: var(--size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: #fff;
+  border: 4px solid #111;
+  box-shadow: 0 0 0 4px #fff inset, 0 4px 0 #111;
+  border-radius: 6px;
+  cursor: pointer;
+  position: absolute;
 }
-.bubble li {
-  margin: 0.3em 0;
+.icon-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 4px #fff inset, 0 2px 0 #111;
 }
 
+/* 画像そのものの“ドット感” */
+.icon-img {
+  image-rendering: pixelated;
+  display: block;
+}
+
+/* 配置とサイズ調整 */
+.icon-close {
+  top: -14px;
+  right: -14px;
+}
+.icon-img--close {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-question {
+  left: -8px;
+  top: -8px;
+  --size: 40px;
+}
+.icon-img--question {
+  width: 40px;
+  height: 40px;
+}
+
+/* キャラ */
+.char-wrap {
+  position: relative;
+  display: inline-block;
+}
 .char {
   width: min(24vw, 180px);
   height: auto;
